@@ -24,8 +24,12 @@ class View {
       $square.addClass("marked")
     }
     if (this.game.isOver()) {
-        $(`<div>${this.game.currentPlayer} has won</div>`).addClass('winner-text').appendTo('body')
-        return;
+      let winner = this.game.winner()
+      if (!winner) {
+        winner = 'Nobody'
+      }
+      $(`<div>${winner} has won!</div>`).addClass('winner-text').appendTo('body')
+      return;
     }
   }
 
