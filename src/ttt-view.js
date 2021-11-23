@@ -14,7 +14,14 @@ class View {
   }
 
   makeMove($square) {
-    console.log("move made")
+    let posArr = $square.attr("data-pos");
+    let color = "red"
+    if (this.game.currentPlayer === "o") {
+      color = "green"
+    }
+    $square.html(`<h1>${this.game.currentPlayer}</h1>`).css("color", color)
+    $square.addClass("marked")
+    this.game.swapTurn();
   }
 
   setupBoard() {

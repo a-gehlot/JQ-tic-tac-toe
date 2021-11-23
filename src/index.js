@@ -1,10 +1,9 @@
 const View = require("./ttt-view")
 const Game = require("./../solution/game")
 
-new Game();
-
-  $(() => {
-    // Your code here
-    const $root = $(".ttt");
-    new View(this, $root)
-  });
+$(() => {
+  // Your code here
+  const root = $(".ttt");
+  let game = new Game();
+  new View(game, root)
+});

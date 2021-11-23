@@ -43,9 +43,9 @@ eval("\nconst MoveError = function (msg) { this.msg = msg; };\n\n// MoveError re
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const View = __webpack_require__(/*! ./ttt-view */ \"./src/ttt-view.js\")\nconst Game = __webpack_require__(/*! ./../solution/game */ \"./solution/game.js\")\n\nnew Game();\n\n  $(() => {\n    // Your code here\n    const $root = $(\".ttt\");\n    new View(this, $root)\n  });\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const View = __webpack_require__(/*! ./ttt-view */ \"./src/ttt-view.js\")\nconst Game = __webpack_require__(/*! ./../solution/game */ \"./solution/game.js\")\n\n$(() => {\n  // Your code here\n  const root = $(\".ttt\");\n  let game = new Game();\n  new View(game, root)\n});\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -55,7 +55,7 @@ eval("const View = __webpack_require__(/*! ./ttt-view */ \"./src/ttt-view.js\")\
   \*************************/
 /***/ ((module) => {
 
-eval("class View {\n  constructor(game, $el) {\n    this.$el = $el\n    this.game = game;\n    this.setupBoard();\n  }\n\n  bindEvents() {\n    let self = this;\n    let $li = $(\"li\");\n    $li.click(function() {\n      self.makeMove($(this))\n    })\n  }\n\n  makeMove($square) {\n    console.log(\"move made\")\n  }\n\n  setupBoard() {\n    this.$el.append(\"<ul>\");\n    let $ul = this.$el.find(\"ul\");\n    for (let i = 0; i < 3; i++) {\n      for (let j = 0; j < 3; j++) {\n        $ul.append(\"<li>\")\n        let $appended_item = $(\"ul li\").last();\n        $appended_item.attr(\"data-pos\", [i, j]);\n      }\n    }\n    this.bindEvents();\n  }\n\n}\n\n\nmodule.exports = View;\n\n\n//# sourceURL=webpack:///./src/ttt-view.js?");
+eval("class View {\n  constructor(game, $el) {\n    this.$el = $el\n    this.game = game;\n    this.setupBoard();\n  }\n\n  bindEvents() {\n    let self = this;\n    let $li = $(\"li\");\n    $li.click(function() {\n      self.makeMove($(this))\n    })\n  }\n\n  makeMove($square) {\n    let posArr = $square.attr(\"data-pos\");\n    let color = \"red\"\n    if (this.game.currentPlayer === \"o\") {\n      color = \"green\"\n    }\n    $square.html(`<h1>${this.game.currentPlayer}</h1>`).css(\"color\", color)\n    $square.addClass(\"marked\")\n    this.game.swapTurn();\n  }\n\n  setupBoard() {\n    this.$el.append(\"<ul>\");\n    let $ul = this.$el.find(\"ul\");\n    for (let i = 0; i < 3; i++) {\n      for (let j = 0; j < 3; j++) {\n        $ul.append(\"<li>\")\n        let $appended_item = $(\"ul li\").last();\n        $appended_item.attr(\"data-pos\", [i, j]);\n      }\n    }\n    this.bindEvents();\n  }\n\n}\n\n\nmodule.exports = View;\n\n\n//# sourceURL=webpack:///./src/ttt-view.js?");
 
 /***/ })
 
@@ -79,7 +79,7 @@ eval("class View {\n  constructor(game, $el) {\n    this.$el = $el\n    this.gam
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -89,7 +89,7 @@ eval("class View {\n  constructor(game, $el) {\n    this.$el = $el\n    this.gam
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
 /******/ 	
 /******/ })()
