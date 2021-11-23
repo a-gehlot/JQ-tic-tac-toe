@@ -14,17 +14,18 @@ class View {
   }
 
   makeMove($square) {
-    let posArr = $square.attr("data-pos");
+    let posArr = $square.data("data-pos");
     let color = "red"
-    if (this.game.currentPlayer === "o") {
-      color = "green"
-    }
     if ($square.hasClass("marked")) {
       alert("This is an invalid move!")
     } else {
+      this.game.playMove(posArr)
       $square.html(`<h1>${this.game.currentPlayer}</h1>`).css("color", color)
       $square.addClass("marked")
-      this.game.swapTurn();
+    }
+    if (this.game.isOver()) {
+        $(`<div>${this.game.currentPlayer} has won</div>`).addClass('winner-text').appendTo('body')
+        return;
     }
   }
 
@@ -35,7 +36,7 @@ class View {
       for (let j = 0; j < 3; j++) {
         $ul.append("<li>")
         let $appended_item = $("ul li").last();
-        $appended_item.attr("data-pos", [i, j]);
+        $appended_item.data("data-pos", [i, j]);
       }
     }
     this.bindEvents();
