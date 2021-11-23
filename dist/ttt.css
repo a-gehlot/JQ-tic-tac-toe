@@ -20,3 +20,7 @@ figure {
     display: flex;
     justify-content: center;
 }
+
+.marked {
+    background-color: white;
+}
