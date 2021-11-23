@@ -19,9 +19,13 @@ class View {
     if (this.game.currentPlayer === "o") {
       color = "green"
     }
-    $square.html(`<h1>${this.game.currentPlayer}</h1>`).css("color", color)
-    $square.addClass("marked")
-    this.game.swapTurn();
+    if ($square.hasClass("marked")) {
+      alert("This is an invalid move!")
+    } else {
+      $square.html(`<h1>${this.game.currentPlayer}</h1>`).css("color", color)
+      $square.addClass("marked")
+      this.game.swapTurn();
+    }
   }
 
   setupBoard() {
