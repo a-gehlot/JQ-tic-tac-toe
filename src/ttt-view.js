@@ -15,7 +15,6 @@ class View {
 
   makeMove($square) {
     let posArr = $square.data("data-pos");
-    let color = "red"
     if ($square.hasClass("marked")) {
       alert("This is an invalid move!")
     } else {
@@ -27,6 +26,7 @@ class View {
     if (this.game.isOver()) {
       let winner = this.game.winner() || "Nobody"
       $(`<b>${winner} has won this time!</b>`).addClass('winner-text').appendTo('body')
+      $("li").unbind("click")
     }
   }
 
