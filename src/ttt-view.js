@@ -19,17 +19,14 @@ class View {
     if ($square.hasClass("marked")) {
       alert("This is an invalid move!")
     } else {
+      $square.html(`${this.game.currentPlayer}`)
       this.game.playMove(posArr)
-      $square.html(`<h1>${this.game.currentPlayer}</h1>`).css("color", color)
       $square.addClass("marked")
+      this.game.board.print();
     }
     if (this.game.isOver()) {
-      let winner = this.game.winner()
-      if (!winner) {
-        winner = 'Nobody'
-      }
-      $(`<div>${winner} has won!</div>`).addClass('winner-text').appendTo('body')
-      return;
+      let winner = this.game.winner() || "Nobody"
+      $(`<b>${winner} has won this time!</b>`).addClass('winner-text').appendTo('body')
     }
   }
 
